@@ -1,0 +1,109 @@
+@font-face {
+  font-family: Nasalization;
+  src: url(../fonts/nasalization-rg.otf);
+}
+@import url('https://fonts.googleapis.com/css2?family=Saira:wght@400;700&display=swap');
+
+*{
+  font-family: 'Saira', sans-serif;
+  color: #ffffff;
+}
+
+body{ 
+  background-image: url(../images/bg.svg);
+  background-size: cover;
+  color: rgb(255, 255, 255);
+}
+
+.heading h1{
+  font-size: 4rem;
+  letter-spacing: 4px;
+  font-family: 'Saira', sans-serif;
+  font-weight: bold;
+  text-align: center;
+  color: #030f33;
+  background: linear-gradient(#48B1CB 15%, #0F5CCC 55%,  #AC48A9 80%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-stroke: 8px transparent;
+}
+
+
+h2{
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+
+@media screen and (max-width: 768px) {
+  .heading h1{
+      font-size: 3rem;
+      letter-spacing: 2px;
+  }
+  h2{
+    font-size: 1.8rem;
+  }
+}
+
+
+.outerbox {
+    border: 5px solid;
+    border-image: linear-gradient(to right, #48B1CB, #0F5CCC,  #AC48A9) 1;
+    border-radius: 20px;
+    background-color: rgba(10, 10, 10, 0.2);
+}
+
+.sponsorbox {
+    /* width: 90vw; */
+    margin: 2%;
+    padding: 1.5%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.sponsorheading {
+    text-align: center;
+    font-size: 2rem;
+    margin: 5px;
+    padding: 5px;
+    font-weight: bold;
+}
+
+.sponsorheading p {
+    color: -webkit-linear-gradient(#eee, #333);
+}
+
+.sponsor {
+    /*  */
+    /* border:1px solid red;
+    box-shadow: 0 0 2px #fff, 0 0 5px #fff, 0 0 10px red,
+    0 0 20px red; */
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    width: auto;  
+    min-height: 110px;
+    text-decoration: none;
+    border-bottom:  0px solid rgb(255, 0, 102);
+}
+
+.sponsor:hover {
+    transition: all 0.25s ease-in-out;
+    transform: translateY(-10px);
+    border-bottom: 4px solid rgb(255, 0, 102);
+}
+
+.sponsor img {
+    max-width: 100%;
+    max-height: 100px;
+    height: auto;
+}
+
+#notperfectimage {
+    height: 150px;
+    width: 150px;
+}

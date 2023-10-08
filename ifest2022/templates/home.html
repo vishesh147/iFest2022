@@ -1,0 +1,165 @@
+{% extends 'navbar.html' %}
+{% load static %}
+
+
+{% block content %}
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>i.Fest '22</title>
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/Image_Slider.css' %}">
+
+</head>
+
+<body>
+    <div class="banner pt-5 d-flex justify-content-center" style="height: 100vh; overflow: hidden;">
+        <div class="logo-banner">
+            <img class="logo" src="{% static 'images/logo_banner.png' %}" style="width: 100%;">
+            <div class="d-flex mt-4">
+                <a href="{% url 'signup' %}"  class="link-btn btn mx-auto text-center" style="text-decoration: none;">
+                    Register Now!
+                </a>
+            </div>
+            
+        </div>
+        
+        <img class="svg-banner" src="{% static 'images/landing/bannersvg.svg' %}">
+        <div class="bg-banner" style="z-index: -2; margin-left: 7%;">
+            <img src="{% static 'images/landing/banner_elements.svg' %}" alt="" style="opacity: 0.4;">
+        </div>
+        <div class="fixed-top" style="z-index: -1; opacity: 18%; width: 90%; padding-left: 10%;">
+            <img src="{% static 'images/landing/elements.svg' %}" alt="" style="width:90%">
+        </div>
+    </div>
+
+    <div class="container mt-5 pt-5">
+        <div class="row px-2">
+            <div id="timer" class="timer-class text-center">
+       
+            </div>
+        </div>
+    </div>
+    
+
+
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <img class="swiper-slide" src="{% static 'images/homepage_images/I1.jpg' %}">
+            <img class="swiper-slide" src="{% static 'images/homepage_images/I2.jpg' %}">
+            <img class="swiper-slide" src="{% static 'images/homepage_images/I3.jpg' %}">
+            <img class="swiper-slide" src="{% static 'images/homepage_images/I4.jpg' %}">
+            <img class="swiper-slide" src="{% static 'images/homepage_images/I5.jpg' %}">
+            <img class="swiper-slide" src="{% static 'images/homepage_images/I6.jpg' %}">
+            <img class="swiper-slide" src="{% static 'images/homepage_images/I7.jpg' %}">
+            <img class="swiper-slide" src="{% static 'images/homepage_images/I8.jpg' %}">
+            <img class="swiper-slide" src="{% static 'images/homepage_images/I9.jpg' %}">
+        </div>
+    </div>
+
+    <div class="container py-5">
+        <div class="row">
+            <div class="text-start ps-5">
+                <p class="back-text">About Us</p>
+                <!-- <p class="front-text">About Us</p> -->
+            </div>
+        </div>
+        <div class="row about_cont">
+            <div class="col-md-6 pt-4">
+                <p>Dhirubhai Ambani Institute of Information and Technology (DA-IICT), known for its research and
+                    development, has emerged as the torch bearer among the premier technological institution of Gujarat
+                    over the past 16 years.
+                    i.Fest is one of the most anticipated and acknowledged technical fest all over Gujarat. It is lauded
+                    for its versatile and wide ranging technical, social and non-technical events. i.Fest provides an
+                    outstanding platform for students to showcase, inculcate the valuable skill of innovation and
+                    simultaneously compete with their technical and non-technical skills and win huge amount of cash
+                    prizes. Last year, we witnessed over 2000 participants in this 3-day techno-social events.</p>
+            </div>
+            <div class="col-md-6">
+                <img src="{% static 'images/landing/aboutussq.svg' %}" class="img-responsive" style="width:100%" alt="Image">
+            </div>
+        </div>
+            
+        
+        <div class="row">
+            <div class="text-end pe-5">
+                <p class="back-text">Reality Reloaded</p>
+                <!-- <p class="front-text">Reality Reloaded</p> -->
+            </div>
+        </div>
+        <div class="row about_cont">
+            <div class="col-md-5">
+                <img src="{% static 'images/landing/realityreloaded.svg' %}" class="img-responsive" style="width:100%" alt="Image">
+            </div>
+            <div class="col-md-7 pt-4">
+                <p>Dhirubhai Ambani Institute of Information and Technology (DA-IICT), known for its research and
+                    development, has emerged as the torch bearer among the premier technological institution of Gujarat
+                    over the past 16 years.
+                    i.Fest is one of the most anticipated and acknowledged technical fest all over Gujarat. It is lauded
+                    for its versatile and wide ranging technical, social and non-technical events. i.Fest provides an
+                    outstanding platform for students to showcase, inculcate the valuable skill of innovation and
+                    simultaneously compete with their technical and non-technical skills and win huge amount of cash
+                    prizes. Last year, we witnessed over 2000 participants in this 3-day techno-social events.</p>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script>
+    // Set the date we're counting down to
+    var countDownDate = new Date("Nov 11, 2022 18:00:00").getTime();
+    
+    // Update the count down every 1 second
+    var x = setInterval(function() {
+    
+      // Get today's date and time
+      var now = new Date().getTime();
+        
+      // Find the distance between now and the count down date
+      var distance = countDownDate - now;
+        
+      // Time calculations for days, hours, minutes and seconds
+      var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        
+      // Output the result in an element with id="demo"
+      document.getElementById("timer").innerHTML = days + "d : " + hours + "h : " + minutes + "m : " + seconds + "s ";
+        
+      // If the count down is over, write some text 
+      if (distance < 0) {
+        clearInterval(x);
+        document.getElementById("demo").innerHTML = "00 d : " + "00 h : " + "00 m : " + "00 s ";;
+      }
+    }, 1000);
+</script>
+
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script>
+      var swiper = new Swiper('.swiper-container', {
+          effect: 'coverflow',
+          grabCursor: true,
+          centeredSlides: true,
+          slidesPerView: 'auto',
+          coverflowEffect: {
+              rotate: 30,
+              stretch: 0,
+              depth: 200,
+              modifier: 1,
+              slideShadows : true
+          },
+          autoplay: {
+              delay: 2000,
+              disableOnInteraction: false
+          },
+      });
+</script>
+<script src="{% static 'js/responsive.js' %}"></script>
+
+
+{% endblock %}

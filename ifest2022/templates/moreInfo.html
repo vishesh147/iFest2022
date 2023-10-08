@@ -1,0 +1,171 @@
+{% extends 'navbar.html' %}
+{% load static %}
+
+{% block content %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'css/moreInfo.css' %}">
+
+<div class="heading mt-5 pt-4 text-center">
+    <h1>{{ event.name }}</h1>
+</div>
+
+
+<div class="container mt-5">
+    <div class="row mx-3">
+        <div class="col-md-12 event-info mb-3">
+            <p class="text-center">
+                {{event.Data.Info}}
+            </p>
+        </div>
+        <div class="col-md-12 event-schedule mb-5">
+            <table class="px-4 mx-auto">
+                <tr>
+                    <td class="p-1 align-top"><b>Date</b></td>
+                    <td class="px-2 align-top"><b>:</b></td>
+                    <td class="p-1 align-top">{{ event.Data.Date }}</td>
+                </tr>
+                <tr>
+                    <td class="p-1 align-top"><b>Time</b></td>
+                    <td class="px-2 align-top"><b>:</b></td>
+                    <td class="p-1 align-top">{{ event.Data.Time }}</td>
+                </tr>
+                <tr>
+                    <td class="p-1 align-top"><b>Venue</b></td>
+                    <td class="px-2 align-top"><b>:</b></td>
+                    <td class="p-1 align-top">{{ event.Data.Venue }}</td>
+                </tr>
+            </table>
+        </div>
+        
+        {% if event.Data.GeneralRules %}
+        <div class="col-md-12 event-generalrules mb-4">
+            <h3 class="event-generalrules-heading mx-4 pb-1 mb-2 data-underline"><b>General Rules</b></h3>
+            <ul class="px-4">
+                {% for rule in event.Data.GeneralRules %}
+                <li>{{rule}}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+
+        {% for round in event.Data.Rounds %}
+        <div class="col-md-12 event-roundrules mb-4">
+            <h3 class="event-generalrules-heading mx-4 pb-1 mb-2 data-underline"><b>Round {{ round.ID }}</b></h3>
+            <ul class="px-4">
+                {% for rule in round.Rules %}
+                <li>{{rule}}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endfor %}
+        
+        {% if event.Data.Link %}
+            <div class="round-link mb-4">
+                <h3 class="event-info-heading text-center">
+                    <a href="https://{{ event.Data.Link }}" target="_blank" style="color: #00ccff;">
+                        <b><i style="color: #00ccff">{{ event.Data.LinkDesc }}</i></b>
+                    </a>
+                </h2>
+            </div>
+        {% endif %}
+        
+        {% if user.is_authenticated %}
+            <div class="round-link mb-4">
+                <h3 class="event-info-heading text-center">
+                    <a href="https://{{ event.Data.RestrictedLink }}" target="_blank" style="color: #00ccff;">
+                        <b><i style="color: #00ccff;">{{ event.Data.RestrictedLinkDesc }}</i></b>
+                    </a>
+                </h2>
+            </div>
+        {% endif %}
+
+        
+        {% if user.is_authenticated %}
+            {% if event.Data.Links %}
+            <div class="mb-3">
+                <div class="col-md-12 event-prize mb-3 mt-3 text-center">
+                    <h2 class="prize-heading mx-4"><b>Game Registration Links</b></h2>
+                </div>
+                {% for desc, link in event.Data.Links.items %}
+                <div class="round-link mb-3">
+                    <h3 class="event-info-heading text-center">
+                        <a href="{{ link }}" target="_blank" style="color: #00ccff; text-decoration: none;">
+                            <b><i style="color: #00ccff;">{{ desc }}</i></b>
+                        </a>
+                    </h2>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+        {% endif %}
+
+        <div class="col-md-12 event-prize mb-5 mt-3 text-center">
+            <h2 class="prize-heading mx-4"><b>Prizes Worth: </b> <b style="color:#e500dd"> {{event.Data.Prize}} </b> </h2>
+        </div>
+
+        {% if register %}
+        <div class="col-md-12 event-registration text-center">
+            {% if now.date < event.registrationDeadline.date %}
+                {% if user.is_authenticated %}
+                <form method="POST">
+                    {% csrf_token %}
+                    <button type="submit" class="btn">{{ button }}</button>
+                </form>
+                {% else %}
+                <form method="GET" action="{% url 'login_page' %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn">{{ button }}</button>
+                </form>
+                {% endif %}
+            {% elif now.date == event.registrationDeadline.date %}
+                {% if now.time < event.registrationDeadline.time %}
+                    {% if user.is_authenticated %}
+                    <form method="POST">
+                        {% csrf_token %}
+                        <button type="submit" class="btn">{{ button }}</button>
+                    </form>
+                    {% else %}
+                    <form method="GET" action="{% url 'login_page' %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn">{{ button }}</button>
+                    </form>
+                    {% endif %}
+
+                {% else %}
+                    <div class="registration-verdict text-center">
+                        <h2 class="text-danger blink-hard">Registration Closed</h2>
+                    </div>
+                {% endif %}
+            {% else %}
+                <div class="registration-verdict text-center">
+                    <h2 class="text-danger blink-hard">Registration Closed</h2>
+                </div>
+            {% endif %}
+        </div>
+
+        {% else %}
+            
+            {% if event.Data.RegLink %}
+                <div class="col-md-12 event-registration text-center">
+                    <h2 style="font-weight: bold;" class="text-danger blink-hard">
+                        <a class="link-btn btn" href="{{ event.Data.RegLink }}" style="text-decoration: none;">Register</a>
+                    </h2>
+                </div>
+                {% else %}
+                <div class="col-md-12 event-registration text-center">
+                    <div class="registration-verdict text-center">
+                        <h2 style="font-weight: bold;" class="text-danger blink-hard">Registration Closed</h2>
+                    </div>
+                </div>
+            {% endif %}
+        {% endif %}
+    </div>
+</div>
+
+
+
+
+<script src="{% static 'js/moreInfo.js' %}"></script>
+
+{% endblock %}
+

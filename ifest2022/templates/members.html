@@ -1,0 +1,42 @@
+{% extends 'navbar.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'css/members.css' %}">
+
+
+<div class="heading mt-5 pt-4 mb-3 text-center">
+    <h1>Team</h1>
+</div>
+
+
+<div class="container-fluid py-4">
+    <div class="row team-box justify-content-center mx-4">
+        {% for team, data in ifest.items %}
+          <div class="heading col-md-10 my-3 text-center">
+            <h2 class="pb-0" style="font-size: 2rem;"><b>{{ team }}</b></h2>
+          </div>
+          {% for name, phn in data.items %}
+          <div class="col-md-3 col-sm-8 col-11 m-4 box">
+            <div class="row p-0">
+                <div class="col-md-12 text-center p-0">
+                    <img style="width: 100%;" src="{% static 'images/team/'|add:name|cut:' '|add:'.jpg' %}">
+                </div>
+                <div class="info col-md-12 p-3">
+                  <h5><b>{{ name }}</b></h5>
+                  <a href="tel: {{ phn }}" style="text-decoration: none; color:#00ccff"><h6>{{ phn }}</h6></a>
+                </div>
+            </div>
+          </div>
+          {% endfor %}
+          <div class="mb-5"></div>
+        {% endfor %}
+    </div>
+</div>
+
+
+{% endblock %}
+
+
